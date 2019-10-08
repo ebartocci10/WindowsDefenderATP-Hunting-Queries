@@ -19,7 +19,8 @@ MiscEvents
 //    For most purposes it is probably better to query on the events themselves (see query #1).
 //    However, this query might still be useful sometimes (e.g. to quickly parse the family name).
 AlertEvents
-| where Title contains "Defender AV detected"
+| where Title contains "was detected"
+// Query no longer returns "Defender AV detected" in the title
 | parse Title with *"'"FamilyName"'"*
 | summarize FamilyCount=dcount(FamilyName), Families=makeset(FamilyName), Titles=makeset(Title) by ComputerName, MachineId, bin(EventTime, 1d)
 | where FamilyCount > 1
