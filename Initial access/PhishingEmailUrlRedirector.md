@@ -9,6 +9,7 @@ The query helps detect emails associated with a campaign that has used open red
 ```
 EmailUrlInfo
 | where Url matches regex @"s?\:\/\/(?:www\.)?t\.(?:[\w\-\.]+\/+)+(?:r|redirect)\/?\?"
+| join (EmailEvents) on NetworkMessageId
 ```
 
 ## Category
